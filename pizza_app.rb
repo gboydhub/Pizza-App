@@ -5,11 +5,8 @@ def get_sauce(id)
     end
 end
 
-def get_size(id)
-    sizes = ["Small", "Medium", "Large"]
-    if id <= sizes.length
-        return sizes[id]
-    end
+def get_sizes()
+    {"Small" => 5.00, "Medium" => 6.50, "Large" => 8.00}
 end
 
 def get_meat(id)
@@ -26,18 +23,31 @@ def get_topping(id)
     end
 end
 
+def get_order()
+    puts "What size pizza would you like?"
+    get_sizes.each do |s|
+        puts "#{s[0]} is #{s[1]}"
+    end
+    
+    crust = gets.chomp.to_i
+    print "\nWhat type of sauce?\n"
+end
+
+def print_menu()
+    system 'clear' or system 'cls'
+    puts <<-MENU
+    ================================================
+    ===             
+    MENU
+end
+
 def generate_pizza()
-    print 'How many pizzas would you like: '
-    pcount = gets.chomp.to_i
-    while pcount > 0 do 
-        randompizza = Array.new
+    randompizza = Array.new
         randompizza[0] = get_size(rand(0...3))
         randompizza[1] = get_sauce(rand(0...3))
         randompizza[2] = get_meat(rand(0...4))
         randompizza[3] = get_topping(rand(0...3))
-        puts "You have a #{randompizza[0]} #{randompizza[2]} & #{randompizza[3]} pizza with #{randompizza[1]} sauce."
-        pcount -= 1
-    end
+        #puts "You have a #{randompizza[0]} #{randompizza[2]} & #{randompizza[3]} pizza with #{randompizza[1]} sauce."
 end
 
-generate_pizza()
+get_order()
