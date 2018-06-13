@@ -27,12 +27,17 @@ def get_topping(id)
 end
 
 def generate_pizza()
-    randompizza = Array.new
-    randompizza[0] = get_size(rand(0...3))
-    randompizza[1] = get_sauce(rand(0...3))
-    randompizza[2] = get_meat(rand(0...4))
-    randompizza[3] = get_topping(rand(0...3))
-    puts "You have a #{randompizza[0]} #{randompizza[2]} & #{randompizza[3]} pizza with #{randompizza[1]} sauce."
+    print 'How many pizzas would you like: '
+    pcount = gets.chomp.to_i
+    while pcount > 0 do 
+        randompizza = Array.new
+        randompizza[0] = get_size(rand(0...3))
+        randompizza[1] = get_sauce(rand(0...3))
+        randompizza[2] = get_meat(rand(0...4))
+        randompizza[3] = get_topping(rand(0...3))
+        puts "You have a #{randompizza[0]} #{randompizza[2]} & #{randompizza[3]} pizza with #{randompizza[1]} sauce."
+        pcount -= 1
+    end
 end
 
 generate_pizza()
