@@ -1,8 +1,5 @@
 def get_sauce(id)
-    sauces = ["Red", "White", "Garlic"]
-    if id <= sauces.length
-        return sauces[id]
-    end
+    ["Red", "White", "Garlic"]
 end
 
 def get_sizes()
@@ -10,27 +7,29 @@ def get_sizes()
 end
 
 def get_meat(id)
-    meats = ["Pepperoni", "Sausage", "Ham", "Chicken"]
-    if id <= meats.length
-        return meats[id]
-    end
+    ["Pepperoni", "Sausage", "Ham", "Chicken"]
 end
 
 def get_topping(id)
-    toppings = ["Olives", "Pineapple", "Peppers"]
-    if id <= toppings.length
-        return toppings[id]
-    end
+    ["Olives", "Pineapple", "Peppers"]
 end
 
 def get_order()
-    puts "What size pizza would you like?"
-    get_sizes.each do |s|
-        puts "#{s[0]} is #{s[1]}"
+    totalprice = 0
+    get_sizes.each_with_index do |s, i|
+        puts "#{i+1}. #{s[0]} is #{s[1]}"
     end
-    
+    puts "What size pizza would you like?"
     crust = gets.chomp.to_i
-    print "\nWhat type of sauce?\n"
+    while crust > get_sizes.length do
+        puts "Invalid option, enter a number for your selection."
+        crust = gets.chomp.to_i
+    end
+
+    totalprice += get_sizes[get_sizes.keys[crust-1]]
+    
+    puts "\nWhat type of sauce?"
+
 end
 
 def print_menu()
