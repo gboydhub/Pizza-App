@@ -11,14 +11,14 @@ def get_meat()
 end
 
 def get_topping()
-    ["Olives", "Pineapple", "Peppers"]
+    ["Olives", "Pineapple", "Peppers", "Mushrooms", "Onions"]
 end
 
 def get_order()
     system 'clear' or system 'cls'
     totalprice = 0
     get_sizes.each_with_index do |s, i|
-        puts "#{i+1}. #{s[0]} is #{s[1]}"
+        puts "#{i+1}. #{s[0]} is $#{'%.2f'%s[1]}"
     end
     puts "What size pizza would you like?"
     crust = gets.chomp.to_i
@@ -40,6 +40,8 @@ def get_order()
         sauce = gets.chomp.to_i
     end
 
+    system 'clear' or system 'cls'
+
     puts "Would you like extra cheese?"
     extra_cheese = false
     cheese_key = 'k'
@@ -49,6 +51,8 @@ def get_order()
     end
     if cheese_key == 'y'; extra_cheese = true; totalprice += 1.00 end
     
+    system 'clear' or system 'cls'
+
     get_meat.each_with_index do |v, i|
         puts "#{i+1}. #{v}"
     end
@@ -59,7 +63,7 @@ def get_order()
         meats = meats.split(', ')
         meats_check = true
         meats.each do |v|
-            if v.to_i.to_s != v
+            if v.to_i.to_s != v || v.to_i < 1 || v.to_i > get_meat.length
                 puts "Invalid selection"
                 meats_check = false
                 break
@@ -79,9 +83,47 @@ def get_order()
         end
         totalprice += 0.75
     end
+    
+    system 'clear' or system 'cls'
 
-    puts "You selected: #{meats_string}"
-    p totalprice
+    get_topping.each_with_index do |v, i|
+        puts "#{i+1}. #{v}"
+    end
+    puts "Please select additional toppings, seperated by a comma.\nType the same topping twice to get extra.\nExample: 2, 2, 5    Would be Onions and Extra Pineapple"
+    toppings_check = false
+    while !toppings_check do
+        toppings = gets.chomp
+        toppings = toppings.split(', ')
+        toppings_check = true
+        toppings.each do |v|
+            if v.to_i.to_s != v || v.to_i < 1 || v.to_i > get_topping.length
+                puts "Invalid selection"
+                toppings_check = false
+                break
+            end
+        end
+    end
+
+    toppings_string = ""
+    toppings.each_with_index do |v, i|
+        v = get_topping[v.to_i - 1]
+        if toppings_string.include?(v)
+            unless toppings_string.include?("Extra #{v}"); toppings_string = toppings_string.sub(v, "Extra #{v}")
+            else next end
+        else
+            if i > 0; toppings_string += ", " end
+            toppings_string += v
+        end
+        totalprice += 0.50
+    end
+
+    p crust
+    p sauce
+    p extra_cheese
+    p meats_string
+    p toppings_string
+    p '%.2f'%totalprice
+
 end
 
 def print_menu()
