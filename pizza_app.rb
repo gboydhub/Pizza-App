@@ -1,4 +1,4 @@
-def get_sauce(id)
+def get_sauce()
     ["Red", "White", "Garlic"]
 end
 
@@ -6,29 +6,42 @@ def get_sizes()
     {"Small" => 5.00, "Medium" => 6.50, "Large" => 8.00}
 end
 
-def get_meat(id)
+def get_meat()
     ["Pepperoni", "Sausage", "Ham", "Chicken"]
 end
 
-def get_topping(id)
+def get_topping()
     ["Olives", "Pineapple", "Peppers"]
 end
 
 def get_order()
+    system 'clear' or system 'cls'
     totalprice = 0
     get_sizes.each_with_index do |s, i|
         puts "#{i+1}. #{s[0]} is #{s[1]}"
     end
     puts "What size pizza would you like?"
     crust = gets.chomp.to_i
-    while crust > get_sizes.length do
+    while crust > get_sizes.length || crust < 1 do
         puts "Invalid option, enter a number for your selection."
         crust = gets.chomp.to_i
     end
-
     totalprice += get_sizes[get_sizes.keys[crust-1]]
+
+    system 'clear' or system 'cls'
+
     
+    get_sauce.each_with_index do |v, i|
+        puts "#{i+1}. #{v}"
+    end
     puts "\nWhat type of sauce?"
+    sauce = gets.chomp.to_i
+    while sauce > get_sauce.length || sauce < 1 do
+        puts "Invalid option, enter a number for your selection."
+        sauce = gets.chomp.to_i
+    end
+
+
 
 end
 
