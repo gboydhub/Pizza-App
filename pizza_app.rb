@@ -3,11 +3,11 @@ def get_sauce()
 end
 
 def get_sizes()
-    {"Small" => 5.00, "Medium" => 6.50, "Large" => 8.00}
+    {"Small" => 5.00, "Medium" => 8.00, "Large" => 11.00}
 end
 
 def get_meat()
-    ["Pepperoni", "Sausage", "Ham", "Chicken"]
+    ["Pepperoni", "Sausage", "Ham", "Chicken", "Bacon"]
 end
 
 def get_topping()
@@ -30,7 +30,6 @@ def get_order()
 
     system 'clear' or system 'cls'
 
-    
     get_sauce.each_with_index do |v, i|
         puts "#{i+1}. #{v}"
     end
@@ -41,8 +40,48 @@ def get_order()
         sauce = gets.chomp.to_i
     end
 
+    puts "Would you like extra cheese?"
+    extra_cheese = false
+    cheese_key = 'k'
+    while cheese_key.downcase != 'y' && cheese_key.downcase != 'n' do
+        print "Please select [y/n]: "
+        cheese_key = gets.chomp
+    end
+    if cheese_key == 'y'; extra_cheese = true; totalprice += 1.00 end
+    
+    get_meat.each_with_index do |v, i|
+        puts "#{i+1}. #{v}"
+    end
+    puts "Please select meat items, seperated by a comma.\nType the same meat twice to get extra.\nExample: 1, 1, 4    Would be Bacon and Extra Pepperoni"
+    meats_check = false
+    while !meats_check do
+        meats = gets.chomp
+        meats = meats.split(', ')
+        meats_check = true
+        meats.each do |v|
+            if v.to_i.to_s != v
+                puts "Invalid selection"
+                meats_check = false
+                break
+            end
+        end
+    end
 
+    meats_string = ""
+    meats.each_with_index do |v, i|
+        v = get_meat[v.to_i - 1]
+        if meats_string.include?(v)
+            unless meats_string.include?("Extra #{v}"); meats_string = meats_string.sub(v, "Extra #{v}")
+            else next end
+        else
+            if i > 0; meats_string += ", " end
+            meats_string += v
+        end
+        totalprice += 0.75
+    end
 
+    puts "You selected: #{meats_string}"
+    p totalprice
 end
 
 def print_menu()
