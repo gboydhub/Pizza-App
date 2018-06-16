@@ -27,6 +27,7 @@ def get_order()
         crust = gets.chomp.to_i
     end
     totalprice += get_sizes[get_sizes.keys[crust-1]]
+    crust_string = get_sizes.keys[crust-1]
 
     system 'clear' or system 'cls'
 
@@ -39,6 +40,7 @@ def get_order()
         puts "Invalid option, enter a number for your selection."
         sauce = gets.chomp.to_i
     end
+    sauce_string = get_sauce[sauce-1]
 
     system 'clear' or system 'cls'
 
@@ -117,13 +119,24 @@ def get_order()
         totalprice += 0.50
     end
 
-    p crust
-    p sauce
-    p extra_cheese
-    p meats_string
-    p toppings_string
-    p '%.2f'%totalprice
+    system 'clear' or system 'cls'
 
+    puts "You selected a #{crust_string} pizza with #{sauce_string} sauce."
+    if meats_string != "" || toppings_string != "" || extra_cheese == true
+        print "You wanted "
+        if meats_string != ""; print meats_string end
+        if toppings_string != ""; print ", #{toppings_string}" end
+        if extra_cheese; print " and Extra Cheese\n" end
+    end
+    puts "Your total is: #{'%.2f'%totalprice}"
+    puts "\nIs this correct? [y/n]"
+
+    correct_key = 'k'
+    while correct_key != 'y' && correct_key != 'n'
+        correct_key = gets.chomp.downcase
+    end
+
+    if correct_key == 'n'; get_order() end
 end
 
 def print_menu()
