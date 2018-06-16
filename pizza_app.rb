@@ -128,7 +128,7 @@ def get_order()
         if toppings_string != ""; print ", #{toppings_string}" end
         if extra_cheese; print " and Extra Cheese\n" end
     end
-    puts "Your total is: #{'%.2f'%totalprice}"
+    puts "Your total is: $#{'%.2f'%totalprice}"
     puts "\nIs this correct? [y/n]"
 
     correct_key = 'k'
@@ -137,23 +137,6 @@ def get_order()
     end
 
     if correct_key == 'n'; get_order() end
-end
-
-def print_menu()
-    system 'clear' or system 'cls'
-    puts <<-MENU
-    ================================================
-    ===             
-    MENU
-end
-
-def generate_pizza()
-    randompizza = Array.new
-        randompizza[0] = get_size(rand(0...3))
-        randompizza[1] = get_sauce(rand(0...3))
-        randompizza[2] = get_meat(rand(0...4))
-        randompizza[3] = get_topping(rand(0...3))
-        #puts "You have a #{randompizza[0]} #{randompizza[2]} & #{randompizza[3]} pizza with #{randompizza[1]} sauce."
 end
 
 get_order()
