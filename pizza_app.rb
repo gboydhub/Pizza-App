@@ -9,6 +9,7 @@ PS.toppings = ["Olives", "Pineapple", "Peppers", "Mushrooms", "Onions"]
 PS.select_size()
 PS.select_sauce()
 PS.select_meat_toppings()
+PS.select_veggie_toppings()
 PS.ask_extra_cheese()
 
 
@@ -103,49 +104,49 @@ def get_order()
     #     totalprice += 0.75
     # end
     
-    system 'clear' or system 'cls'
+    # system 'clear' or system 'cls'
 
-    get_topping.each_with_index do |v, i|
-        puts "#{i+1}. #{v}"
-    end
-    puts "Please select additional toppings, seperated by a comma.\nType the same topping twice to get extra.\nExample: 2, 2, 5    Would be Onions and Extra Pineapple"
-    toppings_check = false
-    while !toppings_check do
-        toppings = gets.chomp
-        toppings = toppings.split(', ')
-        toppings_check = true
-        toppings.each do |v|
-            if v.to_i.to_s != v || v.to_i < 1 || v.to_i > get_topping.length
-                puts "Invalid selection"
-                toppings_check = false
-                break
-            end
-        end
-    end
+    # get_topping.each_with_index do |v, i|
+    #     puts "#{i+1}. #{v}"
+    # end
+    # puts "Please select additional toppings, seperated by a comma.\nType the same topping twice to get extra.\nExample: 2, 2, 5    Would be Onions and Extra Pineapple"
+    # toppings_check = false
+    # while !toppings_check do
+    #     toppings = gets.chomp
+    #     toppings = toppings.split(', ')
+    #     toppings_check = true
+    #     toppings.each do |v|
+    #         if v.to_i.to_s != v || v.to_i < 1 || v.to_i > get_topping.length
+    #             puts "Invalid selection"
+    #             toppings_check = false
+    #             break
+    #         end
+    #     end
+    # end
 
-    toppings_string = ""
-    toppings.each_with_index do |v, i|
-        v = get_topping[v.to_i - 1]
-        if toppings_string.include?(v)
-            unless toppings_string.include?("Extra #{v}"); toppings_string = toppings_string.sub(v, "Extra #{v}")
-            else next end
-        else
-            if i > 0; toppings_string += ", " end
-            toppings_string += v
-        end
-        totalprice += 0.50
-    end
+    # toppings_string = ""
+    # toppings.each_with_index do |v, i|
+    #     v = get_topping[v.to_i - 1]
+    #     if toppings_string.include?(v)
+    #         unless toppings_string.include?("Extra #{v}"); toppings_string = toppings_string.sub(v, "Extra #{v}")
+    #         else next end
+    #     else
+    #         if i > 0; toppings_string += ", " end
+    #         toppings_string += v
+    #     end
+    #     totalprice += 0.50
+    # end
 
-    system 'clear' or system 'cls'
+    # system 'clear' or system 'cls'
 
-    puts "You selected a #{crust_string} pizza with #{sauce_string} sauce."
-    if meats_string != "" || toppings_string != "" || extra_cheese == true
-        print "You wanted "
-        if meats_string != ""; print meats_string end
-        if toppings_string != ""; print ", #{toppings_string}" end
-        if extra_cheese; print " and Extra Cheese\n" end
-    end
-    puts "Your total is: $#{'%.2f'%totalprice}"
+    # puts "You selected a #{crust_string} pizza with #{sauce_string} sauce."
+    # if meats_string != "" || toppings_string != "" || extra_cheese == true
+    #     print "You wanted "
+    #     if meats_string != ""; print meats_string end
+    #     if toppings_string != ""; print ", #{toppings_string}" end
+    #     if extra_cheese; print " and Extra Cheese\n" end
+    # end
+    # puts "Your total is: $#{'%.2f'%totalprice}"
     puts "\nIs this correct? [y/n]"
 
     correct_key = 'k'
