@@ -56,6 +56,41 @@ class PizzaSystem
     @sauce_string = @sauces[sauce-1]
   end
 
+  def select_meat_toppings()
+    system 'clear' or system 'cls'
+
+    @meats.each_with_index do |v, i|
+        puts "#{i+1}. #{v}"
+    end
+    puts "Please select meat items, seperated by a comma.\nType the same meat twice to get extra.\nExample: 1, 1, 4    Would be Bacon and Extra Pepperoni"
+    meats_check = false
+    while !meats_check do
+        meat_input = gets.chomp
+        meat_input = meat_input.split(', ')
+        meats_check = true
+        meat_input.each do |v|
+            if v.to_i.to_s != v || v.to_i < 1 || v.to_i > @meats.length
+                puts "Invalid selection"
+                meats_check = false
+                break
+            end
+        end
+    end
+
+    @meats_string = ""
+    meat_input.each_with_index do |v, i|
+        v = @meats[v.to_i - 1]
+        if @meats_string.include?(v)
+            unless @meats_string.include?("Extra #{v}"); @meats_string = @meats_string.sub(v, "Extra #{v}")
+            else next end
+        else
+            if i > 0; @meats_string += ", " end
+            @meats_string += v
+        end
+        @total_price += 0.75
+    end
+  end
+
   def reset_price()
     @total_price = 0.00
   end
@@ -64,6 +99,7 @@ class PizzaSystem
     p @crust_string
     p @sauce_string
     p @extra_cheese
+    p @meats_string
   end
 
   def print_price()

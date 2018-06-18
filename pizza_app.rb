@@ -8,6 +8,7 @@ PS.toppings = ["Olives", "Pineapple", "Peppers", "Mushrooms", "Onions"]
 
 PS.select_size()
 PS.select_sauce()
+PS.select_meat_toppings()
 PS.ask_extra_cheese()
 
 
@@ -69,38 +70,38 @@ def get_order()
     # end
     # if cheese_key == 'y'; extra_cheese = true; totalprice += 1.00 end
     
-    system 'clear' or system 'cls'
+    # system 'clear' or system 'cls'
 
-    get_meat.each_with_index do |v, i|
-        puts "#{i+1}. #{v}"
-    end
-    puts "Please select meat items, seperated by a comma.\nType the same meat twice to get extra.\nExample: 1, 1, 4    Would be Bacon and Extra Pepperoni"
-    meats_check = false
-    while !meats_check do
-        meats = gets.chomp
-        meats = meats.split(', ')
-        meats_check = true
-        meats.each do |v|
-            if v.to_i.to_s != v || v.to_i < 1 || v.to_i > get_meat.length
-                puts "Invalid selection"
-                meats_check = false
-                break
-            end
-        end
-    end
+    # get_meat.each_with_index do |v, i|
+    #     puts "#{i+1}. #{v}"
+    # end
+    # puts "Please select meat items, seperated by a comma.\nType the same meat twice to get extra.\nExample: 1, 1, 4    Would be Bacon and Extra Pepperoni"
+    # meats_check = false
+    # while !meats_check do
+    #     meats = gets.chomp
+    #     meats = meats.split(', ')
+    #     meats_check = true
+    #     meats.each do |v|
+    #         if v.to_i.to_s != v || v.to_i < 1 || v.to_i > get_meat.length
+    #             puts "Invalid selection"
+    #             meats_check = false
+    #             break
+    #         end
+    #     end
+    # end
 
-    meats_string = ""
-    meats.each_with_index do |v, i|
-        v = get_meat[v.to_i - 1]
-        if meats_string.include?(v)
-            unless meats_string.include?("Extra #{v}"); meats_string = meats_string.sub(v, "Extra #{v}")
-            else next end
-        else
-            if i > 0; meats_string += ", " end
-            meats_string += v
-        end
-        totalprice += 0.75
-    end
+    # meats_string = ""
+    # meats.each_with_index do |v, i|
+    #     v = get_meat[v.to_i - 1]
+    #     if meats_string.include?(v)
+    #         unless meats_string.include?("Extra #{v}"); meats_string = meats_string.sub(v, "Extra #{v}")
+    #         else next end
+    #     else
+    #         if i > 0; meats_string += ", " end
+    #         meats_string += v
+    #     end
+    #     totalprice += 0.75
+    # end
     
     system 'clear' or system 'cls'
 
