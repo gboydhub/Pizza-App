@@ -1,5 +1,6 @@
 require './PizzaSystem.rb'
 
+PS = PizzaSystem.new
 def get_sauce()
     ["Red", "White", "Garlic"]
 end
