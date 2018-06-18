@@ -5,7 +5,11 @@ class PizzaSystem
     @sizes={}
     @meats=[]
     @toppings=[]
-    @total_price = 0
+    @total_price = 0.0
+
+    @total_taxes = 0.0
+    @delivery_fee = 0.0
+    @tip_fee = 0.0
 
     @crust_string = ""
     @sauce_string = ""
@@ -16,11 +20,11 @@ class PizzaSystem
   end
 
   def apply_taxes()
-    @total_price *= 1.06
+    @total_taxes = @total_price * 0.06
   end
 
   def apply_delivery_fee(miles)
-    @total_price += check_delivery_fee(miles)
+    @delivery_fee = check_delivery_fee(miles)
   end
 
   def check_delivery_fee(miles)
@@ -28,7 +32,19 @@ class PizzaSystem
   end
 
   def apply_tip(tip_percent)
-    @total_price += (@total_price * (tip_percent.to_f/100))
+    @tip_fee = (@total_price * (tip_percent.to_f/100))
+  end
+
+  def print_reciept()
+    puts "Pizza Order Reciept"
+    puts '========================'
+    puts "Pizza Subtotal    $#{'%.2f'% @total_price}"
+    puts "Delivery Fee      $#{'%.2f'% @delivery_fee}"
+    puts "Tip               $#{'%.2f'% @tip_fee}"
+    puts "Taxes             $#{'%.2f'% @total_taxes}"
+    puts "------------------------"
+    pizza_total = @total_price + @delivery_fee + @tip_fee + @total_taxes
+    puts "                  $#{'%.2f'% pizza_total}"
   end
 
   def ask_for_tip()
@@ -189,8 +205,8 @@ class PizzaSystem
     end
   end
 
-  def print_price(type_string)
-    puts "Your #{type_string} is: $#{'%.2f'% @total_price}"
+  def print_price()
+    puts "Your subtotal is: $#{'%.2f'% @total_price}"
   end
 
   attr_accessor :sauces
