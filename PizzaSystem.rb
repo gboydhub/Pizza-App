@@ -15,6 +15,22 @@ class PizzaSystem
     
   end
 
+  def apply_taxes()
+    @total_price *= 1.06
+  end
+
+  def apply_delivery_fee(miles)
+    @total_price += check_delivery_fee(miles)
+  end
+
+  def check_delivery_fee(miles)
+    (5 + (miles * 0.5))
+  end
+
+  def apply_tip(tip_percent)
+    @total_price += (@total_price * (tip_percent/100))
+  end
+
   def select_size()
     system 'clear' or system 'cls'
     @sizes.each_with_index do |s, i|
