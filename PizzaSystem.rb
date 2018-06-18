@@ -47,7 +47,7 @@ class PizzaSystem
 
     wants_delivery = 'k'
     while wants_delivery != 'y' && wants_delivery != 'n' do
-        print "Would you like it delivered? [y/n]: "
+        print "Would you like it delivered? ($5 + $0.50/mi fee)[y/n]: "
         wants_delivery = gets.chomp.downcase
     end
     if wants_delivery == 'y'

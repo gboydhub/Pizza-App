@@ -6,8 +6,6 @@ PS.sauces = ["Red", "White", "Garlic"]
 PS.meats = ["Pepperoni", "Sausage", "Ham", "Chicken", "Bacon"]
 PS.toppings = ["Olives", "Pineapple", "Peppers", "Mushrooms", "Onions"]
 
-
-
 def get_order()
     PS.reset_price()
     PS.select_size()
