@@ -28,9 +28,38 @@ class PizzaSystem
   end
 
   def apply_tip(tip_percent)
-    @total_price += (@total_price * (tip_percent/100))
+    @total_price += (@total_price * (tip_percent.to_f/100))
   end
 
+  def ask_for_tip()
+    system 'clear' or system 'cls'
+    selected_tip = -1
+    while selected_tip < 0 || selected_tip > 15 do
+        print "Please select a tip percentage (0-15): "
+        selected_tip = gets.chomp.to_i
+    end
+
+    apply_tip(selected_tip)
+  end
+
+  def ask_for_delivery()
+    system 'clear' or system 'cls'
+
+    wants_delivery = 'k'
+    while wants_delivery != 'y' && wants_delivery != 'n' do
+        print "Would you like it delivered? [y/n]: "
+        wants_delivery = gets.chomp.downcase
+    end
+    if wants_delivery == 'y'
+        miles_away = -1
+        while miles_away < 0 do
+            print "How many miles away do you live: "
+            miles_away = gets.chomp.to_i
+        end
+        PS.apply_delivery_fee(miles_away)
+    end
+  end
+  
   def select_size()
     system 'clear' or system 'cls'
     @sizes.each_with_index do |s, i|
@@ -160,8 +189,8 @@ class PizzaSystem
     end
   end
 
-  def print_price()
-    puts "Your total is: $#{'%.2f'% @total_price}"
+  def print_price(type_string)
+    puts "Your #{type_string} is: $#{'%.2f'% @total_price}"
   end
 
   attr_accessor :sauces

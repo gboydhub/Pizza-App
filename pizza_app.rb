@@ -19,7 +19,7 @@ def get_order()
     system 'clear' or system 'cls'
 
     PS.print_pizza_selection()
-    PS.print_price()
+    PS.print_price('subtotal')
     puts "\nIs this correct? [y/n]"
 
     correct_key = 'k'
@@ -29,4 +29,10 @@ def get_order()
 
     if correct_key == 'n'; get_order() end
 end
+
 get_order()
+PS.apply_taxes()
+PS.ask_for_tip()
+PS.ask_for_delivery()
+system 'clear' or system 'cls'
+PS.print_price('total')
