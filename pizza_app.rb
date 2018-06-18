@@ -2,25 +2,33 @@ require './PizzaSystem.rb'
 
 PS = PizzaSystem.new
 PS.sizes = {"Small" => 5.00, "Medium" => 8.00, "Large" => 11.00}
+PS.sauces = ["Red", "White", "Garlic"]
+PS.meats = ["Pepperoni", "Sausage", "Ham", "Chicken", "Bacon"]
+PS.toppings = ["Olives", "Pineapple", "Peppers", "Mushrooms", "Onions"]
+
 PS.select_size()
+PS.select_sauce()
+PS.ask_extra_cheese()
+
+
 PS.print_pizza_selection()
 PS.print_price()
 
-def get_sauce()
-    ["Red", "White", "Garlic"]
-end
+# def get_sauce()
+#     ["Red", "White", "Garlic"]
+# end
 
-def get_sizes()
-    {"Small" => 5.00, "Medium" => 8.00, "Large" => 11.00}
-end
+# def get_sizes()
+#     {"Small" => 5.00, "Medium" => 8.00, "Large" => 11.00}
+# end
 
-def get_meat()
-    ["Pepperoni", "Sausage", "Ham", "Chicken", "Bacon"]
-end
+# def get_meat()
+#     ["Pepperoni", "Sausage", "Ham", "Chicken", "Bacon"]
+# end
 
-def get_topping()
-    ["Olives", "Pineapple", "Peppers", "Mushrooms", "Onions"]
-end
+# def get_topping()
+#     ["Olives", "Pineapple", "Peppers", "Mushrooms", "Onions"]
+# end
 
 def get_order()
     # system 'clear' or system 'cls'
@@ -37,29 +45,29 @@ def get_order()
     # totalprice += get_sizes[get_sizes.keys[crust-1]]
     # crust_string = get_sizes.keys[crust-1]
 
-    system 'clear' or system 'cls'
+    # system 'clear' or system 'cls'
 
-    get_sauce.each_with_index do |v, i|
-        puts "#{i+1}. #{v}"
-    end
-    puts "\nWhat type of sauce?"
-    sauce = gets.chomp.to_i
-    while sauce > get_sauce.length || sauce < 1 do
-        puts "Invalid option, enter a number for your selection."
-        sauce = gets.chomp.to_i
-    end
-    sauce_string = get_sauce[sauce-1]
+    # get_sauce.each_with_index do |v, i|
+    #     puts "#{i+1}. #{v}"
+    # end
+    # puts "\nWhat type of sauce?"
+    # sauce = gets.chomp.to_i
+    # while sauce > get_sauce.length || sauce < 1 do
+    #     puts "Invalid option, enter a number for your selection."
+    #     sauce = gets.chomp.to_i
+    # end
+    # sauce_string = get_sauce[sauce-1]
 
-    system 'clear' or system 'cls'
+    # system 'clear' or system 'cls'
 
-    puts "Would you like extra cheese?"
-    extra_cheese = false
-    cheese_key = 'k'
-    while cheese_key.downcase != 'y' && cheese_key.downcase != 'n' do
-        print "Please select [y/n]: "
-        cheese_key = gets.chomp
-    end
-    if cheese_key == 'y'; extra_cheese = true; totalprice += 1.00 end
+    # puts "Would you like extra cheese?"
+    # extra_cheese = false
+    # cheese_key = 'k'
+    # while cheese_key.downcase != 'y' && cheese_key.downcase != 'n' do
+    #     print "Please select [y/n]: "
+    #     cheese_key = gets.chomp
+    # end
+    # if cheese_key == 'y'; extra_cheese = true; totalprice += 1.00 end
     
     system 'clear' or system 'cls'
 
@@ -146,5 +154,3 @@ def get_order()
 
     if correct_key == 'n'; get_order() end
 end
-
-get_order()
