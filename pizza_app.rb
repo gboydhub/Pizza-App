@@ -1,6 +1,11 @@
 require './PizzaSystem.rb'
 
 PS = PizzaSystem.new
+PS.sizes = {"Small" => 5.00, "Medium" => 8.00, "Large" => 11.00}
+PS.select_size()
+PS.print_pizza_selection()
+PS.print_price()
+
 def get_sauce()
     ["Red", "White", "Garlic"]
 end
@@ -18,19 +23,19 @@ def get_topping()
 end
 
 def get_order()
-    system 'clear' or system 'cls'
-    totalprice = 0
-    get_sizes.each_with_index do |s, i|
-        puts "#{i+1}. #{s[0]} is $#{'%.2f'%s[1]}"
-    end
-    puts "What size pizza would you like?"
-    crust = gets.chomp.to_i
-    while crust > get_sizes.length || crust < 1 do
-        puts "Invalid option, enter a number for your selection."
-        crust = gets.chomp.to_i
-    end
-    totalprice += get_sizes[get_sizes.keys[crust-1]]
-    crust_string = get_sizes.keys[crust-1]
+    # system 'clear' or system 'cls'
+    # totalprice = 0
+    # get_sizes.each_with_index do |s, i|
+    #     puts "#{i+1}. #{s[0]} is $#{'%.2f'%s[1]}"
+    # end
+    # puts "What size pizza would you like?"
+    # crust = gets.chomp.to_i
+    # while crust > get_sizes.length || crust < 1 do
+    #     puts "Invalid option, enter a number for your selection."
+    #     crust = gets.chomp.to_i
+    # end
+    # totalprice += get_sizes[get_sizes.keys[crust-1]]
+    # crust_string = get_sizes.keys[crust-1]
 
     system 'clear' or system 'cls'
 
